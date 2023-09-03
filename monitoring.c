@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,12 +15,17 @@ char *exeCommand(const char *command) {
 
     while (fgets(buffer, sizeof(buffer), fp) != NULL) {
         if (result == NULL) {
-            result = strdup(buffer);
+          size_t bufflen = strlen(buffer);
+          result = calloc(bufflen, 1);
+          strncpy(result, buffer, bufflen - 1);
+          
         } else {
             char *temp = result;
-            result = malloc(strlen(temp) + strlen(buffer) + 1);
-            strcpy(result, temp);
-            strcat(result, buffer);
+            size_t tmplen = strlen(temp);
+            size_t bufflen = strlen(buffer);
+            result = calloc(tmplen + bufflen, 1);
+            strncpy(result, temp, tmplen);
+            strncat(result, buffer, bufflen - 1);
             free(temp);
         }
     }
@@ -31,7 +37,7 @@ char *exeCommand(const char *command) {
 int main(int ac, char **av) {
     char *os;
     os = exeCommand("uname");
-    if(strcmp("Linux\n", os))
+  if(strcmp("Linux", os))
     {
         fprintf(stderr, "os not supported yet\n");
         free(os);
