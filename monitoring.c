@@ -29,10 +29,13 @@ char *exeCommand(const char *command) {
 }
 
 int main(int ac, char **av) {
-    if(strcmp(exeCommand("uname"), "linux"))
+    char *os;
+    os = exeCommand("uname");
+    if(strcmp("Linux\n", os))
     {
-      printf("os not supported yet\n");
-      return 1;
+        fprintf(stderr, "os not supported yet\n");
+        free(os);
+        return 1;
     }
     char *unameOutput = exeCommand("uname -a");
     char *cpuInfoOutput = exeCommand("cat /proc/cpuinfo | grep 'processor' | wc -l");
@@ -58,6 +61,7 @@ int main(int ac, char **av) {
     printf("#Network: IP %s\n", networkOutput);
     printf("#Sudo: %s cmd\n", sudoCommandsOutput);
 
+    free(os);
     free(unameOutput);
     free(cpuInfoOutput);
     free(ramInfoOutput);
