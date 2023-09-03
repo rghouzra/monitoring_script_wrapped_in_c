@@ -55,8 +55,8 @@ int main(int ac, char **av) {
     char *networkOutput = exeCommand("hostname -I");
     char *sudoCommandsOutput = exeCommand("journalctl _COMM=sudo -q | grep COMMAND | wc -l");
 
-    printf("#Architecture: %s", unameOutput);
-    printf("#CPU physical: %s", cpuInfoOutput);
+    printf("#Architecture: %s\n", unameOutput);
+    printf("#CPU physical: %s\n", cpuInfoOutput);
     printf("#Memory Usage: %sMB\n", ramInfoOutput);
     printf("#Disk Usage: %sMB\n", diskInfoOutput);
     printf("#CPU load: %.1f%%\n", atof(cpuLoadOutput));
