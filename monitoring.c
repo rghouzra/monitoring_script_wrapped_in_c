@@ -18,7 +18,6 @@ char *exeCommand(const char *command) {
           size_t bufflen = strlen(buffer);
           result = calloc(bufflen, 1);
           strncpy(result, buffer, bufflen - 1);
-          
         } else {
             char *temp = result;
             size_t tmplen = strlen(temp);
