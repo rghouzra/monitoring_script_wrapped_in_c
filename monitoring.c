@@ -35,12 +35,12 @@ char *exeCommand(const char *command) {
 }
 
 int main(int ac, char **av) {
-    char *os;
-    os = exeCommand("uname");
-  if(strcmp("Linux", os))
+    char *osOutput;
+    osOutput = exeCommand("uname");
+    if (strcmp("Linux", osOutput))
     {
         fprintf(stderr, "os not supported yet\n");
-        free(os);
+        free(osOutput);
         return 1;
     }
     char *unameOutput = exeCommand("uname -a");
@@ -67,7 +67,7 @@ int main(int ac, char **av) {
     printf("#Network: IP %s\n", networkOutput);
     printf("#Sudo: %s cmd\n", sudoCommandsOutput);
 
-    free(os);
+    free(osOutput);
     free(unameOutput);
     free(cpuInfoOutput);
     free(ramInfoOutput);
