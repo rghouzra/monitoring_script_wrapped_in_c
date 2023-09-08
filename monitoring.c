@@ -12,7 +12,6 @@ char *exeCommand(const char *command) {
         perror("popen");
         exit(EXIT_FAILURE);
     }
-
     while (fgets(buffer, sizeof(buffer), fp) != NULL) {
         if (result == NULL) {
           size_t bufflen = strlen(buffer);
