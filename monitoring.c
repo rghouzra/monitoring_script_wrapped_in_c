@@ -4,7 +4,7 @@
 #include <string.h>
 
 char *exeCommand(const char *command) {
-    char buffer[128];
+    char buffer[1024];
     char *result = NULL;
     FILE *fp = popen(command, "r");
     
